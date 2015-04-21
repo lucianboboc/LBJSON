@@ -8,6 +8,24 @@ LBJSON
  
 LBJSON framework is a Swift framework that uses an Enum which helps working with JSON
  
+### How to use
+
+
+
+```swift
+
+// LBJSON enum properties int, double, bool, string, array and dictionary returns the associated values or nil
+
+if let posts = LBJSON(object: payload[postsKey]) {
+    if posts.array?.count > 0 {
+        if let firstPost = posts.array?.first {
+            firstPostID = firstPost["post_id"]?.string
+        }
+    }
+}
+``` 
+ 
+###  
  
 ### CocoaPods
 
