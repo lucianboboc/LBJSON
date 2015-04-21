@@ -11,6 +11,8 @@
 		67280EE91AE6917C00F91C8F /* LBJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67280EDD1AE6917B00F91C8F /* LBJSON.framework */; };
 		67280EF01AE6917C00F91C8F /* LBJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */; };
 		67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EF91AE6919000F91C8F /* LBJSON.swift */; };
+		67DE06731AE6D5AD0034F165 /* LICENSE.md in Sources */ = {isa = PBXBuildFile; fileRef = 67DE06711AE6D5AD0034F165 /* LICENSE.md */; };
+		67DE06741AE6D5AD0034F165 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 67DE06721AE6D5AD0034F165 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		67280EEE1AE6917C00F91C8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBJSONTests.swift; sourceTree = "<group>"; };
 		67280EF91AE6919000F91C8F /* LBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBJSON.swift; sourceTree = "<group>"; };
+		67DE06711AE6D5AD0034F165 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		67DE06721AE6D5AD0034F165 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				67280EDF1AE6917B00F91C8F /* LBJSON */,
+				67DE06711AE6D5AD0034F165 /* LICENSE.md */,
+				67DE06721AE6D5AD0034F165 /* README.md */,
 				67280EEC1AE6917C00F91C8F /* LBJSONTests */,
 				67280EDE1AE6917B00F91C8F /* Products */,
 			);
@@ -212,6 +218,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67DE06741AE6D5AD0034F165 /* README.md in Sources */,
+				67DE06731AE6D5AD0034F165 /* LICENSE.md in Sources */,
 				67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
