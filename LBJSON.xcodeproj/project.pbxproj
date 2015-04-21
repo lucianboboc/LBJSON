@@ -10,6 +10,7 @@
 		67280EE31AE6917B00F91C8F /* LBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 67280EE21AE6917B00F91C8F /* LBJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67280EE91AE6917C00F91C8F /* LBJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67280EDD1AE6917B00F91C8F /* LBJSON.framework */; };
 		67280EF01AE6917C00F91C8F /* LBJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */; };
+		67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EF91AE6919000F91C8F /* LBJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		67280EE81AE6917C00F91C8F /* LBJSONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LBJSONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67280EEE1AE6917C00F91C8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBJSONTests.swift; sourceTree = "<group>"; };
+		67280EF91AE6919000F91C8F /* LBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				67280EE21AE6917B00F91C8F /* LBJSON.h */,
+				67280EF91AE6919000F91C8F /* LBJSON.swift */,
 				67280EE01AE6917B00F91C8F /* Supporting Files */,
 			);
 			path = LBJSON;
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,27 +327,32 @@
 		67280EF41AE6917C00F91C8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LBJSON/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		67280EF51AE6917C00F91C8F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = LBJSON/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -399,6 +408,7 @@
 				67280EF51AE6917C00F91C8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		67280EF61AE6917C00F91C8F /* Build configuration list for PBXNativeTarget "LBJSONTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +417,7 @@
 				67280EF81AE6917C00F91C8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
