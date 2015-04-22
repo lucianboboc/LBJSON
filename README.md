@@ -15,12 +15,11 @@ LBJSON framework is a Swift framework that uses an Enum which helps working with
 ```swift
 
 // LBJSON enum properties int, double, bool, string, array and dictionary returns the associated values or nil
+// Instead of casting you can use optional chaining.
 
-if let posts = LBJSON(object: payload[postsKey]) {
+if let posts = LBJSON(object: [["key":"Value"]]) {
     if posts.array?.count > 0 {
-        if let firstPost = posts.array?.first {
-            firstPostID = firstPost["post_id"]?.string
-        }
+        var post = posts.array?.first?.dictionary?["key"]?.string
     }
 }
 ``` 
