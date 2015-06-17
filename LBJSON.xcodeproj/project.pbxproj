@@ -11,8 +11,6 @@
 		67280EE91AE6917C00F91C8F /* LBJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67280EDD1AE6917B00F91C8F /* LBJSON.framework */; };
 		67280EF01AE6917C00F91C8F /* LBJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */; };
 		67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67280EF91AE6919000F91C8F /* LBJSON.swift */; };
-		67DE06731AE6D5AD0034F165 /* LICENSE.md in Sources */ = {isa = PBXBuildFile; fileRef = 67DE06711AE6D5AD0034F165 /* LICENSE.md */; };
-		67DE06741AE6D5AD0034F165 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 67DE06721AE6D5AD0034F165 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +165,7 @@
 		67280ED41AE6917B00F91C8F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Lucian Boboc";
 				TargetAttributes = {
@@ -218,8 +217,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67DE06741AE6D5AD0034F165 /* README.md in Sources */,
-				67DE06731AE6D5AD0034F165 /* LICENSE.md in Sources */,
 				67280EFA1AE6919000F91C8F /* LBJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +341,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -362,6 +360,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

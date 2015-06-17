@@ -15,6 +15,7 @@ public enum LBJSON {
     case Number(NSNumber)
     case String(NSString)
     case Null
+    case Nil
     
     public init?(object:AnyObject?) {
         
@@ -44,7 +45,7 @@ public enum LBJSON {
             case let theObject as NSNull:
                 self = LBJSON.Null
             default:
-                self = Null
+                self = Nil
             }
             
         }else {
@@ -93,6 +94,15 @@ public enum LBJSON {
         }
     }
     
+    public var number: NSNumber? {
+        switch self {
+        case .Number(let object):
+            return object
+        default:
+            return nil
+        }
+    }
+    
     public var bool: Bool? {
         switch self {
         case .Number(let object):
@@ -128,5 +138,90 @@ public enum LBJSON {
         default:
             return nil
         }
+    }
+}
+
+
+extension LBJSON: Printable {
+    
+    public var description: Swift.String {
+        switch self {
+        case .Array(let arrObject):
+            var allObjects:[Swift.String] = []
+            for obj in arrObject {
+                allObjects.append(obj.description)
+            }
+            return allObjects.description
+        case .Dictionary(let dictObject):
+            var allObjects = [NSString:LBJSON]()
+            for (key:NSString, value:LBJSON) in dictObject {
+                allObjects[key] = value
+            }
+            return allObjects.description
+        case .Number(let nrObject):
+            return nrObject.description
+        case .String(let strObject):
+            return strObject.description
+        case .Null:
+            return "NSNull"
+        default:
+            return "Nil"
+        }
+    }
+}
+
+extension LBJSON: Equatable {}
+
+public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
+    switch (lhs,rhs) {
+    case (.Array(let leftObject),.Array(let rightObject)):
+        if leftObject.count == rightObject.count {
+            for (index,obj) in enumerate(leftObject) {
+                if obj == rightObject[index] {
+                    continue
+                }else {
+                    return false
+                }
+            }
+            return true
+        }else {
+            return false
+        }
+    case (.Dictionary(let leftObject),.Dictionary(let rightObject)):
+        if leftObject.count == rightObject.count {
+            var leftKeys = leftObject.keys.array.sorted { (obj1, obj2) -> Bool in
+                return (obj1 as String) < (obj2 as String)
+            }
+            
+            var rightKeys = rightObject.keys.array.sorted { (obj1, obj2) -> Bool in
+                return (obj1 as String) < (obj2 as String)
+            }
+            
+            for (index,leftKey) in enumerate(leftKeys) {
+                if leftKey == rightKeys[index] {
+                    var rightKey = rightKeys[index]
+                    if leftObject[leftKey] == rightObject[rightKey] {
+                        continue
+                    }else {
+                        return false
+                    }
+                }else {
+                    return false
+                }
+            }
+            return true
+        }else {
+            return false
+        }
+    case (.Number(let leftObject), .Number(let rightObject)):
+        return leftObject.isEqualToNumber(rightObject)
+    case (.String(let leftObject), .String(let rightObject)):
+        return leftObject.isEqualToString(rightObject as String)
+    case (.Null, .Null):
+        return true
+    case (.Nil, .Nil):
+        return true
+    default:
+        return false
     }
 }
