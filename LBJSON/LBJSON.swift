@@ -121,6 +121,15 @@ public enum LBJSON {
         }
     }
     
+    public var str: Swift.String? {
+        switch self {
+        case .String(let object):
+            return object as Swift.String
+        default:
+            return nil
+        }
+    }
+    
     public var array: [LBJSON]? {
         switch self {
         case .Array(let object):
