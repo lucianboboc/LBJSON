@@ -8,6 +8,17 @@
 
 import Foundation
 
+
+/// `LBJSON` is an enum object which is used to parse a `JSON` object and values are saved as associated values in the enum cases.
+/// To access the associated values without using the case statement, the provided variables can be used. 
+/// The `LBJSON` enum has the following cases:
+///
+/// - `Array` - this case have an associated value, an array of `LBJSON` objects.
+/// - `Dictionary` - this case have an associated value, a dictionary with `NSString` type for keys and `LBJSON` objects for values.
+/// - `Number` - this case have an associated value, an `NSNumber` object.
+/// - `String` - this case have an associated value, an `NSString` object.
+/// - `Null` - this case doesn't have an associated value and is used where `NSNull` if found in the parsed `JSON` object.
+/// - `Nil` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `nil` and as a default case.
 public enum LBJSON {
     
     case Array([LBJSON])
@@ -17,6 +28,10 @@ public enum LBJSON {
     case Null
     case Nil
     
+    
+    /// The initializer for the LBJSON object.
+    ///
+    /// :param: object is the JSON AnyObject optional type used to initialize the LBJSON enum object.
     public init?(object:AnyObject?) {
         
         if let jsonObject: AnyObject = object {
