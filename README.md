@@ -6,7 +6,7 @@ LBJSON
 [![Platform](https://img.shields.io/cocoapods/p/LBJSON.svg?style=flat)](http://cocoapods.org/pods/LBJSON)
 
  
-LBJSON framework is a Swift framework that uses an Enum which helps working with JSON
+LBJSON is a Swift framework that uses an enum object to parse a JSON.
  
 ### How to use
 
