@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "LBJSON"
-  s.version          = "1.0.3"
+  s.version          = "1.0.4"
   s.summary          = "LBJSON framework"
   s.description      = <<-DESC
                        LBJSON framework is a Swift Enum which helps working with JSON.
