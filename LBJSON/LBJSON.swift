@@ -29,7 +29,7 @@ public enum LBJSON {
     case Nil
     
     
-    /// The initializer for the LBJSON object.
+    /// The initializer for the LBJSON object. It will parse the JSON and create a similar structure of LBSJON enum types with the correct associated values which could be retrieved very easy using the enum's properties.
     ///
     /// :param: object is the JSON AnyObject optional type used to initialize the LBJSON enum object.
     public init?(object:AnyObject?) {
@@ -69,6 +69,10 @@ public enum LBJSON {
     }
     
     
+    /// The read-only subscript using an Int value.
+    ///
+    /// :param: index is an Int value.
+    /// :returns: an optional LBJSON enum instance.
     public subscript(index:Int) -> LBJSON? {
         get {
             switch self {
@@ -80,6 +84,11 @@ public enum LBJSON {
         }
     }
     
+    
+    /// The read-only subscript using an NSString value.
+    ///
+    /// :param: key is an NSString value.
+    /// :returns: an optional LBJSON enum instance.
     public subscript(key:NSString) -> LBJSON? {
         get {
             switch self {
@@ -91,81 +100,121 @@ public enum LBJSON {
         }
     }
     
+    /// `int` is a read-only computed property which tries to retrieve an `Int` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `Int` which has the associated value or `nil` if the value is not of this type.
     public var int: Int? {
-        switch self {
-        case .Number(let object):
-            return object.integerValue
-        default:
-            return nil
+        get {
+            switch self {
+            case .Number(let object):
+                return object.integerValue
+            default:
+                return nil
+            }
         }
     }
     
+    /// `double` is a read-only computed property which tries to retrieve a `Double` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `Double` which has the associated value or `nil` if the value is not of this type.
     public var double: Double? {
-        switch self {
-        case .Number(let object):
-            return object.doubleValue
-        default:
-            return nil
+        get {
+            switch self {
+            case .Number(let object):
+                return object.doubleValue
+            default:
+                return nil
+            }
         }
     }
     
+    /// `number` is a read-only computed property which tries to retrieve an `NSNumber` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `NSNumber` which has the associated value or `nil` if the value is not of this type.
     public var number: NSNumber? {
-        switch self {
-        case .Number(let object):
-            return object
-        default:
-            return nil
+        get{
+            switch self {
+            case .Number(let object):
+                return object
+            default:
+                return nil
+            }
         }
     }
     
+    /// `bool` is a read-only computed property which tries to retrieve a `Bool` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `Bool` which has the associated value or `nil` if the value is not of this type.
     public var bool: Bool? {
-        switch self {
-        case .Number(let object):
-            return object.boolValue
-        default:
-            return nil
+        get {
+            switch self {
+            case .Number(let object):
+                return object.boolValue
+            default:
+                return nil
+            }
         }
     }
     
+    /// `string` is a read-only computed property which tries to retrieve an `NSString` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `NSString` which has the associated value or `nil` if the value is not of this type.
     public var string: NSString? {
-        switch self {
-        case .String(let object):
-            return object
-        default:
-            return nil
+        get {
+            switch self {
+            case .String(let object):
+                return object
+            default:
+                return nil
+            }
         }
     }
     
+    /// `str` is a read-only computed property which tries to retrieve a `String` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional `String` which has the associated value or `nil` if the value is not of this type.
     public var str: Swift.String? {
-        switch self {
-        case .String(let object):
-            return object as Swift.String
-        default:
-            return nil
+        get {
+            switch self {
+            case .String(let object):
+                return object as Swift.String
+            default:
+                return nil
+            }
         }
     }
     
+    /// `array` is a read-only computed property which tries to retrieve an `[LBJSON]` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional array of `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var array: [LBJSON]? {
-        switch self {
-        case .Array(let object):
-            return object
-        default:
-            return nil
+        get {
+            switch self {
+            case .Array(let object):
+                return object
+            default:
+                return nil
+            }
         }
     }
     
-    
+    /// `dictionary` is a read-only computed property which tries to retrieve an `[NSString:LBJSON]` associated value from the LBJSON object.
+    ///
+    /// :returns: an optional dictionary with `NSString` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var dictionary: [NSString:LBJSON]? {
-        switch self {
-        case .Dictionary(let object):
-            return object
-        default:
-            return nil
+        get {
+            switch self {
+            case .Dictionary(let object):
+                return object
+            default:
+                return nil
+            }
         }
     }
 }
 
 
+/// adoption of the Printable protocol to be able to generate a textual representation for an instance of LBJSON type.
 extension LBJSON: Printable {
     
     public var description: Swift.String {
@@ -194,6 +243,7 @@ extension LBJSON: Printable {
     }
 }
 
+/// adoption of the Equatable protocol to be able to compare for value equality 2 instances of LBJSON type.
 extension LBJSON: Equatable {}
 
 public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
