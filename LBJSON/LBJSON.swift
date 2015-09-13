@@ -31,7 +31,7 @@ public enum LBJSON {
     
     /// The initializer for the LBJSON object. It will parse the JSON and create a similar structure of LBSJON enum types with the correct associated values which could be retrieved very easy using the enum's properties.
     ///
-    /// :param: object is the JSON AnyObject optional type used to initialize the LBJSON enum object.
+    /// - parameter object: is the JSON AnyObject optional type used to initialize the LBJSON enum object.
     public init?(object:AnyObject?) {
         
         if let jsonObject: AnyObject = object {
@@ -47,7 +47,7 @@ public enum LBJSON {
                 self = LBJSON.Array(myArray)
             case let theObjects as NSDictionary:
                 var myDict:[NSString:LBJSON] = [:]
-                for (key:AnyObject, obj:AnyObject) in theObjects {
+                for (key, obj): (AnyObject, AnyObject) in theObjects {
                     if let theKey = key as? NSString, let jsonObj = LBJSON(object: obj) {
                         myDict[theKey] = jsonObj
                     }
@@ -57,7 +57,7 @@ public enum LBJSON {
                 self = LBJSON.Number(theObject)
             case let theObject as NSString:
                 self = LBJSON.String(theObject)
-            case let theObject as NSNull:
+            case _ as NSNull:
                 self = LBJSON.Null
             default:
                 self = Nil
@@ -71,8 +71,8 @@ public enum LBJSON {
     
     /// The read-only subscript using an Int value.
     ///
-    /// :param: index is an Int value.
-    /// :returns: an optional LBJSON enum instance.
+    /// - parameter index: is an Int value.
+    /// - returns: an optional LBJSON enum instance.
     public subscript(index:Int) -> LBJSON? {
         get {
             switch self {
@@ -87,8 +87,8 @@ public enum LBJSON {
     
     /// The read-only subscript using an NSString value.
     ///
-    /// :param: key is an NSString value.
-    /// :returns: an optional LBJSON enum instance.
+    /// - parameter key: is an NSString value.
+    /// - returns: an optional LBJSON enum instance.
     public subscript(key:NSString) -> LBJSON? {
         get {
             switch self {
@@ -102,7 +102,7 @@ public enum LBJSON {
     
     /// `int` is a read-only computed property which tries to retrieve an `Int` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `Int` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `Int` which has the associated value or `nil` if the value is not of this type.
     public var int: Int? {
         get {
             switch self {
@@ -116,7 +116,7 @@ public enum LBJSON {
     
     /// `double` is a read-only computed property which tries to retrieve a `Double` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `Double` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `Double` which has the associated value or `nil` if the value is not of this type.
     public var double: Double? {
         get {
             switch self {
@@ -130,7 +130,7 @@ public enum LBJSON {
     
     /// `number` is a read-only computed property which tries to retrieve an `NSNumber` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `NSNumber` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `NSNumber` which has the associated value or `nil` if the value is not of this type.
     public var number: NSNumber? {
         get{
             switch self {
@@ -144,7 +144,7 @@ public enum LBJSON {
     
     /// `bool` is a read-only computed property which tries to retrieve a `Bool` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `Bool` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `Bool` which has the associated value or `nil` if the value is not of this type.
     public var bool: Bool? {
         get {
             switch self {
@@ -158,7 +158,7 @@ public enum LBJSON {
     
     /// `string` is a read-only computed property which tries to retrieve an `NSString` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `NSString` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `NSString` which has the associated value or `nil` if the value is not of this type.
     public var string: NSString? {
         get {
             switch self {
@@ -172,7 +172,7 @@ public enum LBJSON {
     
     /// `str` is a read-only computed property which tries to retrieve a `String` associated value from the LBJSON object.
     ///
-    /// :returns: an optional `String` which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional `String` which has the associated value or `nil` if the value is not of this type.
     public var str: Swift.String? {
         get {
             switch self {
@@ -186,7 +186,7 @@ public enum LBJSON {
     
     /// `array` is a read-only computed property which tries to retrieve an `[LBJSON]` associated value from the LBJSON object.
     ///
-    /// :returns: an optional array of `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional array of `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var array: [LBJSON]? {
         get {
             switch self {
@@ -200,7 +200,7 @@ public enum LBJSON {
     
     /// `dictionary` is a read-only computed property which tries to retrieve an `[NSString:LBJSON]` associated value from the LBJSON object.
     ///
-    /// :returns: an optional dictionary with `NSString` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
+    /// - returns: an optional dictionary with `NSString` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var dictionary: [NSString:LBJSON]? {
         get {
             switch self {
@@ -215,7 +215,7 @@ public enum LBJSON {
 
 
 /// adoption of the Printable protocol to be able to generate a textual representation for an instance of LBJSON type.
-extension LBJSON: Printable {
+extension LBJSON: CustomStringConvertible {
     
     public var description: Swift.String {
         switch self {
@@ -227,7 +227,7 @@ extension LBJSON: Printable {
             return allObjects.description
         case .Dictionary(let dictObject):
             var allObjects = [NSString:LBJSON]()
-            for (key:NSString, value:LBJSON) in dictObject {
+            for (key, value): (NSString, LBJSON) in dictObject {
                 allObjects[key] = value
             }
             return allObjects.description
@@ -250,7 +250,7 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
     switch (lhs,rhs) {
     case (.Array(let leftObject),.Array(let rightObject)):
         if leftObject.count == rightObject.count {
-            for (index,obj) in enumerate(leftObject) {
+            for (index,obj) in leftObject.enumerate() {
                 if obj == rightObject[index] {
                     continue
                 }else {
@@ -263,17 +263,19 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
         }
     case (.Dictionary(let leftObject),.Dictionary(let rightObject)):
         if leftObject.count == rightObject.count {
-            var leftKeys = leftObject.keys.array.sorted { (obj1, obj2) -> Bool in
+            let leftArray = Array(leftObject.keys)
+            let leftKeys = leftArray.sort { (obj1, obj2) -> Bool in
                 return (obj1 as String) < (obj2 as String)
             }
             
-            var rightKeys = rightObject.keys.array.sorted { (obj1, obj2) -> Bool in
+            let rightArray = Array(rightObject.keys)
+            var rightKeys = rightArray.sort { (obj1, obj2) -> Bool in
                 return (obj1 as String) < (obj2 as String)
             }
             
-            for (index,leftKey) in enumerate(leftKeys) {
+            for (index,leftKey) in leftKeys.enumerate() {
                 if leftKey == rightKeys[index] {
-                    var rightKey = rightKeys[index]
+                    let rightKey = rightKeys[index]
                     if leftObject[leftKey] == rightObject[rightKey] {
                         continue
                     }else {

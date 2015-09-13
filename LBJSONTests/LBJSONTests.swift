@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import LBJSON
+@testable import LBJSON
 
 class LBJSONTests: XCTestCase {
     
@@ -23,26 +23,26 @@ class LBJSONTests: XCTestCase {
     }
     
     func testObjectCanBeCreated() {
-        var jsonObj = ["key":"value"]
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = ["key":"value"]
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj != nil, "object should not be nil")
     }
     
     func testObjectCanNotBeCreated() {
-        var obj = LBJSON(object: nil)
+        let obj = LBJSON(object: nil)
         XCTAssert(obj == nil, "object should not be nil")
     }
     
     
     func testObjectArrayProperty() {
-        var jsonObj = [1,2,3]
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = [1,2,3]
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.array != nil, "object should not be nil")
     }
     
     func testObjectArraySubscriptAndIntProperty() {
-        var jsonObj = [1,2,3]
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = [1,2,3]
+        let obj = LBJSON(object: jsonObj)
         let first = obj?.array?[0]
         XCTAssert(first != nil, "object should not be nil")
         let value = first!.int
@@ -53,8 +53,8 @@ class LBJSONTests: XCTestCase {
 
     
     func testObjectDictionaryProperty() {
-        var jsonObj = ["key":"value"]
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = ["key":"value"]
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.dictionary != nil, "object should not be nil")
     }
     
@@ -62,7 +62,7 @@ class LBJSONTests: XCTestCase {
     func testObjectDictionarySubscriptAndStringProperty() {
         let key = "key"
         let dictValue = "value"
-        var jsonObj = [key:dictValue]
+        let jsonObj = [key:dictValue]
         let obj = LBJSON(object: jsonObj)
 
         let first = obj?.dictionary?[key]
@@ -74,47 +74,47 @@ class LBJSONTests: XCTestCase {
     }
     
     func testObjectIntProperty() {
-        var jsonObj = 1
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = 1
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.int != nil, "object should not be nil")
         XCTAssert(obj!.int == 1, "object should be 1")
     }
     
     
     func testObjectDoubleProperty() {
-        var jsonObj = 1.5
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = 1.5
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.double != nil, "object should not be nil")
         XCTAssert(obj!.double == 1.5, "object should be 1.5")
     }
     
     
     func testObjectNumberProperty() {
-        var jsonObj = 1
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = 1
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.number != nil, "object should not be nil")
         XCTAssert(obj!.number!.isEqualToNumber(NSNumber(int: 1)), "object should be 1")
     }
     
     func testObjectBoolProperty() {
-        var jsonObj = true
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = true
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.bool != nil, "object should not be nil")
         XCTAssert(obj!.bool == true, "object should be true")
     }
     
     
     func testObjectStringProperty() {
-        var jsonObj = "str"
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = "str"
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.string != nil, "object should not be nil")
         XCTAssert(obj!.string!.isEqualToString("str"), "object should be 'str'")
     }
     
     
     func testObjectNSStringProperty() {
-        var jsonObj = "str"
-        var obj = LBJSON(object: jsonObj)
+        let jsonObj = "str"
+        let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.str != nil, "object should not be nil")
         XCTAssert(obj!.str != nil, "object should be 1.5")
     }
