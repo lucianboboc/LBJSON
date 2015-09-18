@@ -17,15 +17,13 @@ import Foundation
 /// - `Dictionary` - this case have an associated value, a dictionary with `NSString` type for keys and `LBJSON` objects for values.
 /// - `Number` - this case have an associated value, an `NSNumber` object.
 /// - `String` - this case have an associated value, an `NSString` object.
-/// - `Null` - this case doesn't have an associated value and is used where `NSNull` if found in the parsed `JSON` object.
-/// - `Nil` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `nil` and as a default case.
+/// - `Nil` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `NSNull` or `nil` and as a default case.
 public enum LBJSON {
     
-    case Array([LBJSON])
-    case Dictionary([NSString:LBJSON])
+    indirect case Array([LBJSON])
+    indirect case Dictionary([NSString:LBJSON])
     case Number(NSNumber)
     case String(NSString)
-    case Null
     case Nil
     
     
@@ -58,7 +56,7 @@ public enum LBJSON {
             case let theObject as NSString:
                 self = LBJSON.String(theObject)
             case _ as NSNull:
-                self = LBJSON.Null
+                self = LBJSON.Nil
             default:
                 self = Nil
             }
@@ -235,8 +233,6 @@ extension LBJSON: CustomStringConvertible {
             return nrObject.description
         case .String(let strObject):
             return strObject.description
-        case .Null:
-            return "NSNull"
         default:
             return "Nil"
         }
@@ -293,8 +289,6 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
         return leftObject.isEqualToNumber(rightObject)
     case (.String(let leftObject), .String(let rightObject)):
         return leftObject.isEqualToString(rightObject as String)
-    case (.Null, .Null):
-        return true
     case (.Nil, .Nil):
         return true
     default:
