@@ -20,8 +20,8 @@ import Foundation
 /// - `Nil` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `NSNull` or `nil` and as a default case.
 public enum LBJSON {
     
-    indirect case Array([LBJSON])
-    indirect case Dictionary([NSString:LBJSON])
+    case Array([LBJSON])
+    case Dictionary([NSString:LBJSON])
     case Number(NSNumber)
     case String(NSString)
     case Nil
