@@ -93,7 +93,7 @@ class LBJSONTests: XCTestCase {
         let jsonObj = 1
         let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.number != nil, "object should not be nil")
-        XCTAssert(obj!.number!.isEqualToNumber(NSNumber(int: 1)), "object should be 1")
+        XCTAssert(obj!.number!.isEqual(to: NSNumber(value: 1)), "object should be 1")
     }
     
     func testObjectBoolProperty() {
@@ -108,7 +108,7 @@ class LBJSONTests: XCTestCase {
         let jsonObj = "str"
         let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.string != nil, "object should not be nil")
-        XCTAssert(obj!.string!.isEqualToString("str"), "object should be 'str'")
+        XCTAssert(obj!.string!.isEqual(to: "str"), "object should be 'str'")
     }
     
     

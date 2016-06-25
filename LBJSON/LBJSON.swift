@@ -105,7 +105,7 @@ public enum LBJSON {
         get {
             switch self {
             case .Number(let object):
-                return object.integerValue
+                return object.intValue
             default:
                 return nil
             }
@@ -246,7 +246,7 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
     switch (lhs,rhs) {
     case (.Array(let leftObject),.Array(let rightObject)):
         if leftObject.count == rightObject.count {
-            for (index,obj) in leftObject.enumerate() {
+            for (index,obj) in leftObject.enumerated() {
                 if obj == rightObject[index] {
                     continue
                 }else {
@@ -260,16 +260,16 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
     case (.Dictionary(let leftObject),.Dictionary(let rightObject)):
         if leftObject.count == rightObject.count {
             let leftArray = Array(leftObject.keys)
-            let leftKeys = leftArray.sort { (obj1, obj2) -> Bool in
+            let leftKeys = leftArray.sorted { (obj1, obj2) -> Bool in
                 return (obj1 as String) < (obj2 as String)
             }
             
             let rightArray = Array(rightObject.keys)
-            var rightKeys = rightArray.sort { (obj1, obj2) -> Bool in
+            var rightKeys = rightArray.sorted { (obj1, obj2) -> Bool in
                 return (obj1 as String) < (obj2 as String)
             }
             
-            for (index,leftKey) in leftKeys.enumerate() {
+            for (index,leftKey) in leftKeys.enumerated() {
                 if leftKey == rightKeys[index] {
                     let rightKey = rightKeys[index]
                     if leftObject[leftKey] == rightObject[rightKey] {
@@ -286,9 +286,9 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
             return false
         }
     case (.Number(let leftObject), .Number(let rightObject)):
-        return leftObject.isEqualToNumber(rightObject)
+        return leftObject.isEqual(to: rightObject)
     case (.String(let leftObject), .String(let rightObject)):
-        return leftObject.isEqualToString(rightObject as String)
+        return leftObject.isEqual(to: rightObject as String)
     case (.Nil, .Nil):
         return true
     default:
