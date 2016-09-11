@@ -172,10 +172,14 @@
 				TargetAttributes = {
 					67280EDC1AE6917B00F91C8F = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = UDK56ZTRA7;
+						DevelopmentTeamName = "Lucian Boboc";
 						LastSwiftMigration = 0800;
 					};
 					67280EE71AE6917C00F91C8F = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = UDK56ZTRA7;
+						DevelopmentTeamName = "Lucian Boboc";
 						LastSwiftMigration = 0800;
 					};
 				};

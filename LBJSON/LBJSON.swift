@@ -8,57 +8,56 @@
 
 import Foundation
 
-
 /// `LBJSON` is an enum object which is used to parse a `JSON` object and values are saved as associated values in the enum cases.
-/// To access the associated values without using the case statement, the provided variables can be used. 
+/// To access the associated values without using the case statement, the provided variables can be used.
 /// The `LBJSON` enum has the following cases:
 ///
-/// - `Array` - this case have an associated value, an array of `LBJSON` objects.
-/// - `Dictionary` - this case have an associated value, a dictionary with `NSString` type for keys and `LBJSON` objects for values.
-/// - `Number` - this case have an associated value, an `NSNumber` object.
-/// - `String` - this case have an associated value, an `NSString` object.
-/// - `Nil` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `NSNull` or `nil` and as a default case.
+/// - `array` - this case have an associated value, an array of `LBJSON` objects.
+/// - `dictionary` - this case have an associated value, a dictionary with `String` type for keys and `LBJSON` objects for values.
+/// - `number` - this case have an associated value, an `NSNumber` object.
+/// - `string` - this case have an associated value, an `String` object.
+/// - `null` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `NSNull` or `nil` and as a default case.
 public enum LBJSON {
     
-    case Array([LBJSON])
-    case Dictionary([NSString:LBJSON])
-    case Number(NSNumber)
-    case String(NSString)
-    case Nil
+    case array([LBJSON])
+    case dictionary([String:LBJSON])
+    case number(NSNumber)
+    case string(String)
+    case null
     
     
     /// The initializer for the LBJSON object. It will parse the JSON and create a similar structure of LBSJON enum types with the correct associated values which could be retrieved very easy using the enum's properties.
     ///
-    /// - parameter object: is the JSON AnyObject optional type used to initialize the LBJSON enum object.
-    public init?(object:AnyObject?) {
+    /// - parameter object: is the JSON Any optional type used to initialize the LBJSON enum object.
+    public init?(object:Any?) {
         
-        if let jsonObject: AnyObject = object {
+        if let jsonObject:Any = object {
             
             switch jsonObject {
             case let theObjects as NSArray:
                 var myArray:[LBJSON] = []
-                for obj:AnyObject in theObjects {
+                for obj in theObjects {
                     if let jsonObj = LBJSON(object: obj) {
                         myArray.append(jsonObj)
                     }
                 }
-                self = LBJSON.Array(myArray)
+                self = LBJSON.array(myArray)
             case let theObjects as NSDictionary:
-                var myDict:[NSString:LBJSON] = [:]
-                for (key, obj): (AnyObject, AnyObject) in theObjects {
-                    if let theKey = key as? NSString, let jsonObj = LBJSON(object: obj) {
+                var myDict:[String:LBJSON] = [:]
+                for (key, obj) in theObjects {
+                    if let theKey = key as? String, let jsonObj = LBJSON(object: obj) {
                         myDict[theKey] = jsonObj
                     }
                 }
-                self = LBJSON.Dictionary(myDict)
+                self = LBJSON.dictionary(myDict)
             case let theObject as NSNumber:
-                self = LBJSON.Number(theObject)
-            case let theObject as NSString:
-                self = LBJSON.String(theObject)
+                self = LBJSON.number(theObject)
+            case let theObject as String:
+                self = LBJSON.string(theObject)
             case _ as NSNull:
-                self = LBJSON.Nil
+                self = LBJSON.null
             default:
-                self = Nil
+                self = LBJSON.null
             }
             
         }else {
@@ -74,7 +73,7 @@ public enum LBJSON {
     public subscript(index:Int) -> LBJSON? {
         get {
             switch self {
-            case .Array(let object) where object.count > index:
+            case .array(let object) where object.count > index:
                 return object[index]
             default:
                 return nil
@@ -83,14 +82,14 @@ public enum LBJSON {
     }
     
     
-    /// The read-only subscript using an NSString value.
+    /// The read-only subscript using an String value.
     ///
-    /// - parameter key: is an NSString value.
+    /// - parameter key: is an String value.
     /// - returns: an optional LBJSON enum instance.
-    public subscript(key:NSString) -> LBJSON? {
+    public subscript(key:String) -> LBJSON? {
         get {
             switch self {
-            case .Dictionary(let object):
+            case .dictionary(let object):
                 return object[key]
             default:
                 return nil
@@ -104,7 +103,7 @@ public enum LBJSON {
     public var int: Int? {
         get {
             switch self {
-            case .Number(let object):
+            case .number(let object):
                 return object.intValue
             default:
                 return nil
@@ -118,7 +117,7 @@ public enum LBJSON {
     public var double: Double? {
         get {
             switch self {
-            case .Number(let object):
+            case .number(let object):
                 return object.doubleValue
             default:
                 return nil
@@ -132,7 +131,7 @@ public enum LBJSON {
     public var number: NSNumber? {
         get{
             switch self {
-            case .Number(let object):
+            case .number(let object):
                 return object
             default:
                 return nil
@@ -146,7 +145,7 @@ public enum LBJSON {
     public var bool: Bool? {
         get {
             switch self {
-            case .Number(let object):
+            case .number(let object):
                 return object.boolValue
             default:
                 return nil
@@ -154,28 +153,14 @@ public enum LBJSON {
         }
     }
     
-    /// `string` is a read-only computed property which tries to retrieve an `NSString` associated value from the LBJSON object.
-    ///
-    /// - returns: an optional `NSString` which has the associated value or `nil` if the value is not of this type.
-    public var string: NSString? {
-        get {
-            switch self {
-            case .String(let object):
-                return object
-            default:
-                return nil
-            }
-        }
-    }
-    
-    /// `str` is a read-only computed property which tries to retrieve a `String` associated value from the LBJSON object.
+    /// `string` is a read-only computed property which tries to retrieve an `String` associated value from the LBJSON object.
     ///
     /// - returns: an optional `String` which has the associated value or `nil` if the value is not of this type.
-    public var str: Swift.String? {
+    public var string: String? {
         get {
             switch self {
-            case .String(let object):
-                return object as Swift.String
+            case .string(let object):
+                return object
             default:
                 return nil
             }
@@ -188,7 +173,7 @@ public enum LBJSON {
     public var array: [LBJSON]? {
         get {
             switch self {
-            case .Array(let object):
+            case .array(let object):
                 return object
             default:
                 return nil
@@ -196,13 +181,13 @@ public enum LBJSON {
         }
     }
     
-    /// `dictionary` is a read-only computed property which tries to retrieve an `[NSString:LBJSON]` associated value from the LBJSON object.
+    /// `dictionary` is a read-only computed property which tries to retrieve an `[String:LBJSON]` associated value from the LBJSON object.
     ///
-    /// - returns: an optional dictionary with `NSString` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
-    public var dictionary: [NSString:LBJSON]? {
+    /// - returns: an optional dictionary with `String` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
+    public var dictionary: [String:LBJSON]? {
         get {
             switch self {
-            case .Dictionary(let object):
+            case .dictionary(let object):
                 return object
             default:
                 return nil
@@ -215,23 +200,23 @@ public enum LBJSON {
 /// adoption of the Printable protocol to be able to generate a textual representation for an instance of LBJSON type.
 extension LBJSON: CustomStringConvertible {
     
-    public var description: Swift.String {
+    public var description: String {
         switch self {
-        case .Array(let arrObject):
+        case .array(let arrObject):
             var allObjects:[Swift.String] = []
             for obj in arrObject {
                 allObjects.append(obj.description)
             }
             return allObjects.description
-        case .Dictionary(let dictObject):
-            var allObjects = [NSString:LBJSON]()
-            for (key, value): (NSString, LBJSON) in dictObject {
+        case .dictionary(let dictObject):
+            var allObjects = [String:LBJSON]()
+            for (key, value) in dictObject {
                 allObjects[key] = value
             }
             return allObjects.description
-        case .Number(let nrObject):
+        case .number(let nrObject):
             return nrObject.description
-        case .String(let strObject):
+        case .string(let strObject):
             return strObject.description
         default:
             return "Nil"
@@ -244,7 +229,7 @@ extension LBJSON: Equatable {}
 
 public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
     switch (lhs,rhs) {
-    case (.Array(let leftObject),.Array(let rightObject)):
+    case (.array(let leftObject),.array(let rightObject)):
         if leftObject.count == rightObject.count {
             for (index,obj) in leftObject.enumerated() {
                 if obj == rightObject[index] {
@@ -257,7 +242,7 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
         }else {
             return false
         }
-    case (.Dictionary(let leftObject),.Dictionary(let rightObject)):
+    case (.dictionary(let leftObject),.dictionary(let rightObject)):
         if leftObject.count == rightObject.count {
             let leftArray = Array(leftObject.keys)
             let leftKeys = leftArray.sorted { (obj1, obj2) -> Bool in
@@ -285,11 +270,11 @@ public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
         }else {
             return false
         }
-    case (.Number(let leftObject), .Number(let rightObject)):
+    case (.number(let leftObject), .number(let rightObject)):
         return leftObject.isEqual(to: rightObject)
-    case (.String(let leftObject), .String(let rightObject)):
-        return leftObject.isEqual(to: rightObject as String)
-    case (.Nil, .Nil):
+    case (.string(let leftObject), .string(let rightObject)):
+        return leftObject.isEqual(rightObject)
+    case (.null, .null):
         return true
     default:
         return false
