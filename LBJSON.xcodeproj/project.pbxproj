@@ -31,7 +31,7 @@
 		67280EEE1AE6917C00F91C8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67280EEF1AE6917C00F91C8F /* LBJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBJSONTests.swift; sourceTree = "<group>"; };
 		67280EF91AE6919000F91C8F /* LBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBJSON.swift; sourceTree = "<group>"; };
-		67DE06711AE6D5AD0034F165 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		67DE06711AE6D5AD0034F165 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		67DE06721AE6D5AD0034F165 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				67280EDF1AE6917B00F91C8F /* LBJSON */,
-				67DE06711AE6D5AD0034F165 /* LICENSE.md */,
+				67DE06711AE6D5AD0034F165 /* LICENSE */,
 				67DE06721AE6D5AD0034F165 /* README.md */,
 				67280EEC1AE6917C00F91C8F /* LBJSONTests */,
 				67280EDE1AE6917B00F91C8F /* Products */,
