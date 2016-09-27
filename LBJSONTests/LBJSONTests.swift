@@ -108,15 +108,6 @@ class LBJSONTests: XCTestCase {
         let jsonObj = "str"
         let obj = LBJSON(object: jsonObj)
         XCTAssert(obj?.string != nil, "object should not be nil")
-        XCTAssert(obj!.string!.isEqual(to: "str"), "object should be 'str'")
+        XCTAssert(obj!.string!.isEqual("str"), "object should be 'str'")
     }
-    
-    
-    func testObjectNSStringProperty() {
-        let jsonObj = "str"
-        let obj = LBJSON(object: jsonObj)
-        XCTAssert(obj?.str != nil, "object should not be nil")
-        XCTAssert(obj!.str != nil, "object should be 1.5")
-    }
-    
 }
