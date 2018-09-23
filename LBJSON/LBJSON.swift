@@ -17,7 +17,9 @@ import Foundation
 /// - `number` - this case have an associated value, an `NSNumber` object.
 /// - `string` - this case have an associated value, an `String` object.
 /// - `null` - this case doesn't have an associated value and is used in the failable initializer when the `JSON` param is `NSNull` or `nil` and as a default case.
-public enum LBJSON {
+
+@dynamicMemberLookup
+public enum LBJSON: Equatable, Hashable {
     
     case array([LBJSON])
     case dictionary([String:LBJSON])
@@ -72,12 +74,12 @@ public enum LBJSON {
     /// - returns: an optional LBJSON enum instance.
     public subscript(index:Int) -> LBJSON? {
         get {
-            switch self {
-            case .array(let object) where object.count > index:
+            if case .array(let object) = self,
+                index >= 0,
+                index < object.count {
                 return object[index]
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -86,14 +88,12 @@ public enum LBJSON {
     ///
     /// - parameter key: is an String value.
     /// - returns: an optional LBJSON enum instance.
-    public subscript(key:String) -> LBJSON? {
+    public subscript(dynamicMember key:String) -> LBJSON? {
         get {
-            switch self {
-            case .dictionary(let object):
+            if case .dictionary(let object) = self {
                 return object[key]
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -102,12 +102,10 @@ public enum LBJSON {
     /// - returns: an optional `Int` which has the associated value or `nil` if the value is not of this type.
     public var int: Int? {
         get {
-            switch self {
-            case .number(let object):
+            if case .number(let object) = self {
                 return object.intValue
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -116,12 +114,10 @@ public enum LBJSON {
     /// - returns: an optional `Double` which has the associated value or `nil` if the value is not of this type.
     public var double: Double? {
         get {
-            switch self {
-            case .number(let object):
+            if case .number(let object) = self {
                 return object.doubleValue
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -130,12 +126,10 @@ public enum LBJSON {
     /// - returns: an optional `NSNumber` which has the associated value or `nil` if the value is not of this type.
     public var number: NSNumber? {
         get{
-            switch self {
-            case .number(let object):
+            if case .number(let object) = self {
                 return object
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -144,12 +138,10 @@ public enum LBJSON {
     /// - returns: an optional `Bool` which has the associated value or `nil` if the value is not of this type.
     public var bool: Bool? {
         get {
-            switch self {
-            case .number(let object):
+            if case .number(let object) = self {
                 return object.boolValue
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -158,12 +150,10 @@ public enum LBJSON {
     /// - returns: an optional `String` which has the associated value or `nil` if the value is not of this type.
     public var string: String? {
         get {
-            switch self {
-            case .string(let object):
+            if case .string(let object) = self {
                 return object
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -172,12 +162,10 @@ public enum LBJSON {
     /// - returns: an optional array of `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var array: [LBJSON]? {
         get {
-            switch self {
-            case .array(let object):
+            if case .array(let object) = self {
                 return object
-            default:
-                return nil
             }
+            return nil
         }
     }
     
@@ -186,12 +174,10 @@ public enum LBJSON {
     /// - returns: an optional dictionary with `String` keys and `LBJSON` objects which has the associated value or `nil` if the value is not of this type.
     public var dictionary: [String:LBJSON]? {
         get {
-            switch self {
-            case .dictionary(let object):
+            if case .dictionary(let object) = self {
                 return object
-            default:
-                return nil
             }
+            return nil
         }
     }
 }
@@ -221,62 +207,5 @@ extension LBJSON: CustomStringConvertible {
         default:
             return "Nil"
         }
-    }
-}
-
-/// adoption of the Equatable protocol to be able to compare for value equality 2 instances of LBJSON type.
-extension LBJSON: Equatable {}
-
-public func ==(lhs: LBJSON, rhs: LBJSON) -> Bool {
-    switch (lhs,rhs) {
-    case (.array(let leftObject),.array(let rightObject)):
-        if leftObject.count == rightObject.count {
-            for (index,obj) in leftObject.enumerated() {
-                if obj == rightObject[index] {
-                    continue
-                }else {
-                    return false
-                }
-            }
-            return true
-        }else {
-            return false
-        }
-    case (.dictionary(let leftObject),.dictionary(let rightObject)):
-        if leftObject.count == rightObject.count {
-            let leftArray = Array(leftObject.keys)
-            let leftKeys = leftArray.sorted { (obj1, obj2) -> Bool in
-                return (obj1 as String) < (obj2 as String)
-            }
-            
-            let rightArray = Array(rightObject.keys)
-            var rightKeys = rightArray.sorted { (obj1, obj2) -> Bool in
-                return (obj1 as String) < (obj2 as String)
-            }
-            
-            for (index,leftKey) in leftKeys.enumerated() {
-                if leftKey == rightKeys[index] {
-                    let rightKey = rightKeys[index]
-                    if leftObject[leftKey] == rightObject[rightKey] {
-                        continue
-                    }else {
-                        return false
-                    }
-                }else {
-                    return false
-                }
-            }
-            return true
-        }else {
-            return false
-        }
-    case (.number(let leftObject), .number(let rightObject)):
-        return leftObject.isEqual(to: rightObject)
-    case (.string(let leftObject), .string(let rightObject)):
-        return leftObject.isEqual(rightObject)
-    case (.null, .null):
-        return true
-    default:
-        return false
     }
 }
