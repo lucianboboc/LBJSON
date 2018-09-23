@@ -83,8 +83,20 @@ public enum LBJSON: Equatable, Hashable {
         }
     }
     
-    
     /// The read-only subscript using an String value.
+    ///
+    /// - parameter key: is an String value.
+    /// - returns: an optional LBJSON enum instance.
+    public subscript(key:String) -> LBJSON? {
+        get {
+            if case .dictionary(let object) = self {
+                return object[key]
+            }
+            return nil
+        }
+    }
+    
+    /// The read-only subscript using an String value using dynamicMember.
     ///
     /// - parameter key: is an String value.
     /// - returns: an optional LBJSON enum instance.
