@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "LBJSON"
-  s.version = "4.0.0"
+  s.version = "4.0.1"
   s.license = { :type => "MIT", :file => "LICENSE" }
   s.summary = "LBJSON framework"
   s.homepage = "https://github.com/lucianboboc/"
