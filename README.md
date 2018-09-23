@@ -20,6 +20,12 @@ LBJSON is a Swift framework that uses an enum object to parse a JSON.
 if let posts = LBJSON(object: [["key":"Value"]]) {
     var post = posts.array?.first?.dictionary?["key"]?.string
 }
+
+// With @dynamicMemberLookup
+if let posts = LBJSON(object: [["key":"Value"]]) {
+    var post = posts.array?.first?.key?.string
+}
+
 ``` 
  
 ###  
@@ -38,7 +44,7 @@ To integrate LBJSON into your Xcode project using CocoaPods, specify it in your 
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 pod 'LBJSON'
