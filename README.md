@@ -44,7 +44,7 @@ To integrate LBJSON into your Xcode project using CocoaPods, specify it in your 
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '12.0'
 use_frameworks!
 
 pod 'LBJSON'
